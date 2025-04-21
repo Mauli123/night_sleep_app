@@ -227,6 +227,7 @@ class _SleepSoundsScreenState extends State<SleepSoundsScreen> with SingleTicker
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'Sleep Timer',
@@ -235,22 +236,27 @@ class _SleepSoundsScreenState extends State<SleepSoundsScreen> with SingleTicker
                   fontSize: 14,
                 ),
               ),
-              Row(
-                children: List.generate(
-                  _timerOptions.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: ChoiceChip(
-                      label: Text('${_timerOptions[index]}m'),
-                      selected: _selectedTimerIndex == index,
-                      selectedColor: AppTheme.softPurple,
-                      backgroundColor: AppTheme.deepNavy,
-                      labelStyle: TextStyle(
-                        color: _selectedTimerIndex == index
-                            ? Colors.white
-                            : AppTheme.textDim,
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                      _timerOptions.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: ChoiceChip(
+                          label: Text('${_timerOptions[index]}m'),
+                          selected: _selectedTimerIndex == index,
+                          selectedColor: AppTheme.softPurple,
+                          backgroundColor: AppTheme.deepNavy,
+                          labelStyle: TextStyle(
+                            color: _selectedTimerIndex == index
+                                ? Colors.white
+                                : AppTheme.textDim,
+                          ),
+                          onSelected: (selected) => _selectTimer(index),
+                        ),
                       ),
-                      onSelected: (selected) => _selectTimer(index),
                     ),
                   ),
                 ),
